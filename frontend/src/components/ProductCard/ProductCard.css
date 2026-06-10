@@ -1,0 +1,131 @@
+.product-card {
+  background-color: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #f3eff1;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(244, 143, 177, 0.15);
+  border-color: rgba(244, 143, 177, 0.2);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Relación de aspecto 1:1 */
+  overflow: hidden;
+  background-color: #f7f7f7;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.08);
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+  background-color: #ffffff;
+}
+
+.favorite-btn.active {
+  animation: pulseLogo 0.3s ease-out;
+}
+
+.product-info {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.6rem; /* Mantiene la misma altura independientemente de las líneas */
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.rating-value {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.product-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.product-price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.add-btn-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.product-card:hover .add-btn-icon {
+  background-color: var(--primary-color);
+  transform: rotate(90deg);
+}
