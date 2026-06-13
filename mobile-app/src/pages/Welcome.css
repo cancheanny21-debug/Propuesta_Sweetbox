@@ -1,0 +1,180 @@
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Background Decorative Shapes (Simulating floating macarons/sweets blur) */
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.shape-1 {
+  width: 200px;
+  height: 200px;
+  background: #FFB6C1;
+  top: -50px;
+  left: -50px;
+}
+
+.shape-2 {
+  width: 150px;
+  height: 150px;
+  background: #FFE4E1;
+  bottom: 20%;
+  right: -50px;
+}
+
+.shape-3 {
+  width: 180px;
+  height: 180px;
+  background: #E0FFFF;
+  bottom: -40px;
+  left: 20%;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.welcome-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-dark);
+}
+
+.logo-container {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 1rem;
+  background: var(--white);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 4s ease-in-out infinite;
+}
+
+.welcome-logo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.brand-name {
+  font-family: 'Lobster', 'Quicksand', cursive; /* Optional: adds a sweet typography touch */
+  font-size: 36px;
+  color: #E84A5F;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(232, 74, 95, 0.2);
+}
+
+.action-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--border-radius-pill);
+  font-size: 16px;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(0, 200, 150, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 6px 20px rgba(0, 200, 150, 0.4);
+}
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--text-dark);
+  border: 2px solid #EEEEEE;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary:hover {
+  border-color: #DDDDDD;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-login p {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--white);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+}
+
+.facebook { background: #3b5998; }
+.twitter { background: #1DA1F2; }
+.google { background: #DB4437; }
+
+/* Micro-animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
