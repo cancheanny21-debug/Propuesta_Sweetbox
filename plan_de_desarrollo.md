@@ -9,6 +9,7 @@ Se utilizará la metodología ágil **Scrum**, dividiendo el trabajo en Sprints 
 ## 3. Fases del Proyecto (Sprints)
 
 ### Sprint 1: Fundamentos y Autenticación
+**Avance:** `[██████████] 100%` - ✅ **¡COMPLETADO!**
 *   Configuración del proyecto con React.js y Capacitor.
 *   Configuración de la base de datos MySQL y el backend (API).
 *   Desarrollo de la pantalla de Bienvenida (Logo y opciones de acceso).
@@ -16,6 +17,7 @@ Se utilizará la metodología ágil **Scrum**, dividiendo el trabajo en Sprints 
 *   Configuración del menú de navegación inferior (Bottom Navigation Bar).
 
 ### Sprint 2: Catálogo y Navegación
+**Avance:** `[██████████] 100%` - ✅ **¡COMPLETADO!**
 *   Diseño y desarrollo de la pantalla de Catálogo (Home).
 *   Implementación de la barra de búsqueda y filtros (Ocasión, Precio).
 *   Creación de categorías (Cupcakes, Pasteles, Galletas, Brownies).
@@ -23,12 +25,14 @@ Se utilizará la metodología ágil **Scrum**, dividiendo el trabajo en Sprints 
 *   Implementación de la funcionalidad de "Favoritos".
 
 ### Sprint 3: Carrito y Compras
+**Avance:** `[----------] 0%` - ⏳ *Pendiente*
 *   Desarrollo de la pantalla "Mi Carrito".
 *   Lógica para agregar, eliminar y modificar cantidades de productos.
 *   Cálculo de subtotal, costo de envío y total.
 *   Pantalla de detalle del producto (selección de sabor, relleno, mensaje personalizado).
 
 ### Sprint 4: Pagos y Seguimiento
+**Avance:** `[----------] 0%` - ⏳ *Pendiente*
 *   Integración de pasarela de pagos / métodos de pago digitales.
 *   Pantalla de Seguimiento de Pedido con integración de mapas.
 *   Lógica de estados del pedido (Confirmado, En preparación, En camino, Entregado).
@@ -36,6 +40,7 @@ Se utilizará la metodología ágil **Scrum**, dividiendo el trabajo en Sprints 
 *   Funcionalidad para "Calificar Vendedor".
 
 ### Sprint 5: Pruebas y Lanzamiento
+**Avance:** `[----------] 0%` - ⏳ *Pendiente*
 *   Pruebas de usabilidad y corrección de errores (QA).
 *   Optimización de rendimiento.
 *   Preparación para el despliegue en tiendas de aplicaciones.

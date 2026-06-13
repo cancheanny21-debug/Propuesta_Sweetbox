@@ -12,6 +12,10 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Rutas de la API
+const productRoutes = require('./src/routes/productRoutes');
+app.use('/api', productRoutes);
+
 // Ruta de prueba
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Servidor SweetBox funcionando correctamente.' });

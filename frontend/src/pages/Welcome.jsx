@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Welcome.css';
 import logo from '../assets/logo.png';
 
 const Welcome = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="welcome-container">
       {/* Background Decorative Elements */}
@@ -20,8 +23,8 @@ const Welcome = () => {
         <h2 className="brand-name">SweetBox</h2>
 
         <div className="action-buttons">
-          <button className="btn btn-primary">Crear Cuenta</button>
-          <button className="btn btn-secondary">Iniciar Sesión</button>
+          <button className="btn btn-primary" onClick={() => navigate('/catalog')}>Crear Cuenta</button>
+          <button className="btn btn-secondary" onClick={() => navigate('/catalog')}>Iniciar Sesión</button>
         </div>
 
         <div className="social-login">

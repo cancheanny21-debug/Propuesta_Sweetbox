@@ -55,4 +55,11 @@ CREATE TABLE IF NOT EXISTS Favorites (
 );
 
 -- Insertar categorías por defecto
-INSERT IGNORE INTO Categories (nombre) VALUES ('Cupcakes'), ('Pasteles'), ('Galletas'), ('Brownies');
+INSERT IGNORE INTO Categories (id, nombre) VALUES (1, 'Cupcakes'), (2, 'Pasteles'), (3, 'Galletas'), (4, 'Brownies');
+
+-- Insertar productos de prueba
+INSERT IGNORE INTO Products (id, nombre, categoria_id, precio, rating, url_imagen, ingredientes) VALUES 
+(1, 'Personalized Rainbow Cake', 2, 25.00, 5.0, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Vainilla, Fresa, Crema'),
+(2, 'Choco-Berry Delight', 2, 30.00, 4.8, 'https://images.unsplash.com/photo-1551024601-bec78aea704b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Chocolate, Fresas, Mora'),
+(3, 'Box of Macarons', 3, 15.00, 4.5, 'https://images.unsplash.com/photo-1569864358642-9d1684040f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Almendra, Azúcar, Pistacho'),
+(4, 'Strawberry Cupcake', 1, 4.50, 4.9, 'https://images.unsplash.com/photo-1587668178277-295251f900ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Fresa, Crema Pastelera');
