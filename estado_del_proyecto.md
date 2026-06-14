@@ -41,4 +41,5 @@
 - [x] Desarrollar Pantalla: Bienvenida / Login.
 - [x] Creación del Plan de Desarrollo (`plan_de_desarrollo.md`).
 - [x] Creación de Documentación Técnica (`documentacion_tecnica.md`).
-- [x] Creación de Estado del Proyecto (`estado_del_proyecto.md`).
+- [x] Creación de Análisis Detallado de Interfaz de Usuario (`analisis_ui.md`).
+- [x] CreaciónEstado del Proyecto (`estado_del_proyecto.md`).

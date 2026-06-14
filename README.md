@@ -64,7 +64,7 @@ Abre otra terminal y ejecuta:
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run devm
 ```
 La aplicación móvil se abrirá en modo web en `http://localhost:5173`.
 
