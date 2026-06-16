@@ -14,25 +14,40 @@ const Welcome = () => {
       <div className="bg-shape shape-3"></div>
 
       <div className="welcome-content">
-        <h1 className="welcome-title">Welcome to<br />SweetBox</h1>
-        
+        <h1 className="welcome-title">Bienvenido a<br />SweetBox</h1>
+
         <div className="logo-container">
           <img src={logo} alt="SweetBox Logo" className="welcome-logo" />
         </div>
 
-        <h2 className="brand-name">SweetBox</h2>
+        <h2 className="brand-name">Caja Dulce</h2>
 
         <div className="action-buttons">
-          <button className="btn btn-primary" onClick={() => navigate('/catalog')}>Crear Cuenta</button>
-          <button className="btn btn-secondary" onClick={() => navigate('/catalog')}>Iniciar Sesión</button>
+          {/* ✅ Ahora redirige al formulario de registro */}
+          <button
+            id="btn-crear-cuenta"
+            className="btn btn-primary"
+            onClick={() => navigate('/register')}
+          >
+            Crear Cuenta
+          </button>
+
+          {/* ✅ Ahora redirige al formulario de login */}
+          <button
+            id="btn-iniciar-sesion"
+            className="btn btn-secondary"
+            onClick={() => navigate('/login')}
+          >
+            Iniciar Sesión
+          </button>
         </div>
 
         <div className="social-login">
           <p>Únete o Inicia con:</p>
           <div className="social-icons">
-            <button className="social-btn facebook">f</button>
-            <button className="social-btn twitter">t</button>
-            <button className="social-btn google">G+</button>
+            <button className="social-btn facebook" aria-label="Iniciar con Facebook">f</button>
+            <button className="social-btn twitter" aria-label="Iniciar con Twitter">t</button>
+            <button className="social-btn google" aria-label="Iniciar con Google">G+</button>
           </div>
         </div>
       </div>

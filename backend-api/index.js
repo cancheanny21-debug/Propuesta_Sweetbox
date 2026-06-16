@@ -14,7 +14,9 @@ app.use(express.json());
 
 // Rutas de la API
 const productRoutes = require('./src/routes/productRoutes');
+const authRoutes = require('./src/routes/authRoutes');
 app.use('/api', productRoutes);
+app.use('/api/auth', authRoutes);
 
 // Ruta de prueba
 app.get('/api/health', (req, res) => {
