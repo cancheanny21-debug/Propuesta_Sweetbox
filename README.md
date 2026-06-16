@@ -258,7 +258,7 @@ npm install
 #   DB_USER=root
 #   DB_PASSWORD=
 #   DB_NAME=sweetbox_db
-#   JWT_SECRET=tu_secreto_seguro
+#   JWT_SECRET=sweetbox_secret_key
 #   PORT=3000
 
 # Inicializar la base de datos (crea tablas e inserta datos de prueba)
