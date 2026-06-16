@@ -1,5 +1,5 @@
 # 📄 Documentación Técnica: SweetBox
-**Versión:** 1.0 | **Fecha:** Junio 2026 | **Estado:** En Desarrollo
+**Versión:** 1.1 | **Fecha:** Junio 2026 | **Estado:** En Desarrollo (Sprints 3 y 4 Completados)
 
 ---
 
@@ -89,36 +89,22 @@ node index.js     # Inicia el servidor en http://localhost:3000
 
 ### 2.4 Variables de Entorno (`.env`)
 
-El archivo `backend-api/.env` contiene las credenciales del sistema. **Nunca debe subirse a GitHub** (ya está en `.gitignore`).
-
-```env
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=tu_contraseña_aqui
-DB_NAME=sweetbox_db
-PORT=3000
-```
-
----
-
-## 3. Estructura de Carpetas del Proyecto
-
-```
-Propuesta_Sweetbox/                   ← Raíz del repositorio
-│
-├── frontend/                         ← App React.js (cliente)
-│   ├── src/
-│   │   ├── assets/                   ← Imágenes y recursos estáticos
-│   │   │   └── logo.png              ← Logo de SweetBox
-│   │   ├── components/               ← Componentes reutilizables
+El archivo `backend-api/.env` contiene las credenciales del sistema. **Nunca debe subirse a GitHub** (ya está│   │   ├── components/               ← Componentes reutilizables
 │   │   │   ├── BottomNav.jsx         ← Barra de navegación inferior
 │   │   │   └── BottomNav.css
+│   │   ├── context/                  ← Contexto global
+│   │   │   └── CartContext.jsx       ← Estado del carrito de compras
 │   │   ├── pages/                    ← Vistas/pantallas de la app
-│   │   │   ├── Welcome.jsx           ← Pantalla de bienvenida (Login/Registro)
+│   │   │   ├── Welcome.jsx           ← Pantalla de bienvenida (Login/Registro/Redes sociales)
 │   │   │   ├── Welcome.css
 │   │   │   ├── Catalog.jsx           ← Catálogo de productos (Home)
-│   │   │   └── Catalog.css
+│   │   │   ├── Catalog.css
+│   │   │   ├── Login.jsx             ← Formulario de inicio de sesión real
+│   │   │   ├── Register.jsx          ← Formulario de registro de usuario
+│   │   │   ├── Profile.jsx           ← Perfil de usuario y logout
+│   │   │   ├── ProfileEdit.jsx       ← Modificar datos del perfil
+│   │   │   ├── Cart.jsx              ← Pantalla de Carrito de Compras
+│   │   │   └── Cart.css              ← Estilos del carrito
 │   │   ├── App.jsx                   ← Componente raíz con rutas
 │   │   ├── App.css                   ← Estilos globales
 │   │   ├── main.jsx                  ← Punto de entrada React
@@ -129,7 +115,20 @@ Propuesta_Sweetbox/                   ← Raíz del repositorio
 │   ├── capacitor.config.json         ← Configuración de Capacitor
 │   └── package.json                  ← Dependencias del frontend
 │
-├── backend-api/                      ← API Node.js (servidor)
+│├── backend-api/                      ← API Node.js (servidor)
+│   ├── src/
+│   │   ├── config/
+│   │   │   ├── db.js                 ← Pool de conexión a MySQL (mysql2)
+│   │   │   ├── init.sql              ← Script SQL: crea tablas e inserta datos
+│   │   │   └── setupDb.js            ← Script para inicializar la BD
+│   │   ├── controllers/              ← Lógica de negocio por entidad
+│   │   │   ├── productController.js  ← CRUD de productos
+│   │   │   ├── authController.js     ← Autenticación y Perfil (JWT)
+│   │   │   └── orderController.js    ← Gestión de pedidos (Transacciones)
+│   │   └── routes/                   ← Definición de endpoints de la API
+│   │       ├── productRoutes.js      ← Rutas: GET /api/products
+│   │       ├── authRoutes.js         ← Rutas: Registro, login y perfil
+│   │       └── orderRoutes.js        ← Rutas: POST /api/orders (Protegido por JWT)       ← API Node.js (servidor)
 │   ├── src/
 │   │   ├── config/
 │   │   │   ├── db.js                 ← Pool de conexión a MySQL (mysql2)
@@ -299,62 +298,23 @@ INSERT INTO Categories (id, nombre) VALUES
 
 ### 5.1 Endpoints Implementados
 
-| Método | Ruta | Controlador | Descripción |
-|---|---|---|---|
-| `GET` | `/api/health` | `index.js` | Verifica que el servidor esté activo |
-| `GET` | `/api/products` | `productController.getProducts` | Retorna todos los productos con su categoría |
+| Método | Ruta | Controlador | Descripción | Requiere Auth |
+|---|---|---|---|---|
+| `GET` | `/api/health` | `index.js` | Verifica que el servidor esté activo | No |
+| `GET` | `/api/products` | `productController.getProducts` | Retorna todos los productos con su categoría | Sí (JWT) |
+| `POST` | `/api/auth/register` | `authController.register` | Registra un nuevo usuario en la base de datos | No |
+| `POST` | `/api/auth/login` | `authController.login` | Autentica al usuario y retorna sus datos y token JWT | No |
+| `GET` | `/api/auth/profile` | `authController.getProfile` | Retorna el perfil del usuario autenticado | Sí (JWT) |
+| `POST` | `/api/orders` | `orderController.createOrder` | Crea un nuevo pedido con transacción en MySQL | Sí (JWT) |
 
-**Ejemplo de respuesta `GET /api/products`:**
-```json
-[
-  {
-    "id": 1,
-    "nombre": "Personalized Rainbow Cake",
-    "categoria_id": 2,
-    "precio": "25.00",
-    "rating": "5.00",
-    "url_imagen": "https://...",
-    "ingredientes": "Vainilla, Fresa, Crema",
-    "categoria_nombre": "Pasteles"
-  }
-]
-```
-
----
-
-### 5.2 Endpoints Pendientes — Autenticación
-
-> Estos endpoints deben crearse en `backend-api/src/routes/authRoutes.js` y `authController.js`.
+### 5.2 Endpoints Pendientes para Sprints Futuros
 
 | Método | Ruta | Descripción | Body esperado |
 |---|---|---|---|
-| `POST` | `/api/auth/register` | Registra un nuevo usuario | `{ nombre, correo, password }` |
-| `POST` | `/api/auth/login` | Autentica al usuario y retorna un token JWT | `{ correo, password }` |
-| `GET` | `/api/auth/profile` | Retorna el perfil del usuario autenticado | Header: `Authorization: Bearer <token>` |
-
-**Flujo de Registro esperado:**
-```
-Frontend (Welcome.jsx)
-    │  POST /api/auth/register  { nombre, correo, password }
-    ▼
-authController.js
-    ├── Valida que el correo no exista ya en Users
-    ├── Hashea la contraseña con bcryptjs
-    ├── INSERT INTO Users (nombre, correo, password)
-    └── Responde con { message: "Usuario creado", userId: X }
-```
-
-**Flujo de Login esperado:**
-```
-Frontend (Welcome.jsx)
-    │  POST /api/auth/login  { correo, password }
-    ▼
-authController.js
-    ├── SELECT * FROM Users WHERE correo = ?
-    ├── Compara hash: bcrypt.compare(password, user.password)
-    ├── Si válido → genera JWT con jsonwebtoken
-    └── Responde con { token: "eyJ...", user: { id, nombre, correo } }
-```
+| `POST` | `/api/payments/process` | Procesa pagos simulados con Stripe/PayPal (Sprint 5) | `{ orderId, paymentMethodDetails }` |
+| `PUT` | `/api/orders/:id/status` | Actualiza el estado del pedido (Sprint 5) | `{ estado }` |
+| `GET` | `/api/favorites` | Obtiene la lista de favoritos de un usuario (Sprint 6) | Header: `Authorization: Bearer <token>` |
+| `POST` | `/api/favorites` | Añade un producto a favoritos (Sprint 6) | `{ product_id }` |
 
 ---
 
@@ -362,71 +322,25 @@ authController.js
 
 Definido en [`frontend/src/App.jsx`](file:///c:/Users/ANNY/Documents/GitHub/Propuesta_Sweetbox/frontend/src/App.jsx):
 
-| Ruta | Componente | Descripción |
-|---|---|---|
-| `/` | `Welcome.jsx` | Pantalla de bienvenida con Crear Cuenta / Iniciar Sesión |
-| `/catalog` | `Catalog.jsx` | Catálogo de productos (Home) |
-| `/login` | `Login.jsx` | **[PENDIENTE]** Formulario de inicio de sesión |
-| `/register` | `Register.jsx` | **[PENDIENTE]** Formulario de registro |
-| `/cart` | `Cart.jsx` | **[PENDIENTE]** Carrito de compras |
-| `/tracking` | `Tracking.jsx` | **[PENDIENTE]** Seguimiento del pedido |
-| `/profile` | `Profile.jsx` | **[PENDIENTE]** Perfil del usuario |
+| Ruta | Componente | Estado | Descripción |
+|---|---|---|---|
+| `/` | `Welcome.jsx` | ✅ Completado | Pantalla de bienvenida con accesos y login social (Google, Facebook) |
+| `/login` | `Login.jsx` | ✅ Completado | Formulario de inicio de sesión real conectado al Backend |
+| `/register` | `Register.jsx` | ✅ Completado | Formulario de registro conectado al Backend |
+| `/catalog` | `Catalog.jsx` | ✅ Completado | Catálogo de productos (Home) con "Añadir al Carrito" |
+| `/cart` | `Cart.jsx` | ✅ Completado | Carrito de compras, cantidades y envío de pedido a MySQL |
+| `/profile` | `Profile.jsx` | ✅ Completado | Perfil del usuario, fecha de registro y logout |
+| `/profile/edit` | `ProfileEdit.jsx` | ✅ Completado | Modificación de datos del perfil del usuario |
+| `/tracking` | `Tracking.jsx` | ⏳ Pendiente | Seguimiento del pedido en tiempo real con mapas (Sprint 5) |
 
 ---
 
-## 7. Problema Planteado: Login y Registro con Base de Datos
+## 7. Solución de Autenticación y Carrito de Compras
 
-### 7.1 Situación Actual (Problema)
-
-La pantalla `Welcome.jsx` actualmente **simula** el acceso: los botones "Crear Cuenta" e "Iniciar Sesión" redirigen directamente al catálogo **sin validar ningún usuario ni contraseña**. No existe ninguna lógica real de autenticación conectada a la base de datos.
-
-```jsx
-// SITUACIÓN ACTUAL — Welcome.jsx (líneas 26-27)
-<button onClick={() => navigate('/catalog')}>Crear Cuenta</button>
-<button onClick={() => navigate('/catalog')}>Iniciar Sesión</button>
-// ↑ Ambos botones van directo al catálogo sin autenticación
-```
-
-### 7.2 Solución Requerida
-
-Se debe implementar un sistema completo de autenticación en **3 capas**:
-
-#### Capa 1 — Base de Datos (MySQL)
-La tabla `Users` **ya existe** en `sweetbox_db`. Necesita recibir los registros reales cuando un usuario se registre:
-```sql
--- Registro: insertar usuario con contraseña hasheada
-INSERT INTO Users (nombre, correo, password) VALUES (?, ?, ?);
-
--- Login: buscar usuario por correo
-SELECT id, nombre, correo, password FROM Users WHERE correo = ?;
-```
-
-#### Capa 2 — Backend (Node.js/Express)
-Crear los archivos:
-- `backend-api/src/controllers/authController.js` — lógica de negocio
-- `backend-api/src/routes/authRoutes.js` — endpoints `/register` y `/login`
-- Instalar: `npm install bcryptjs jsonwebtoken`
-
-#### Capa 3 — Frontend (React.js)
-Crear formularios reales en lugar de navegar directamente:
-- `frontend/src/pages/Register.jsx` — formulario: nombre, correo, contraseña
-- `frontend/src/pages/Login.jsx` — formulario: correo, contraseña
-- Guardar el token JWT en `localStorage` al iniciar sesión
-- Redirigir al catálogo solo si la autenticación es exitosa
-
-### 7.3 Dependencias a Instalar
-
-**Backend:**
-```bash
-cd backend-api
-npm install bcryptjs jsonwebtoken
-```
-
-**Frontend (para peticiones HTTP):**
-```bash
-cd frontend
-npm install axios
-```
+Las tareas de autenticación y carrito de compras fueron resueltas e implementadas al 100%:
+- **Autenticación real:** Registro (`/register`) e inicio de sesión (`/login`) conectados a la base de datos MySQL con contraseñas seguras hasheadas vía `bcryptjs` y emisión de tokens `jsonwebtoken`.
+- **Rutas Protegidas:** Componente `PrivateRoute` en el frontend para evitar accesos no autorizados a pantallas privadas como catálogo, carrito y perfil.
+- **Flujo de pedidos transaccional:** Envíos automáticos desde la pantalla del carrito al endpoint `POST /api/orders`, insertando registros de forma segura en las tablas `Orders` y `Order_Items` empleando transacciones de SQL para evitar inconsistencias en caso de fallo.
 
 ---
 

@@ -78,7 +78,7 @@ Mostrar el catálogo de productos real desde la base de datos MySQL.
 ---
 
 ### ✅ Sprint 3: Autenticación Real con Base de Datos
-**Avance:** `[█████████-] 95%` — **COMPLETANDO**
+**Avance:** `[██████████] 100%` — **¡COMPLETADO!**
 
 #### Objetivo
 Implementar registro e inicio de sesión funcional, conectado a la tabla `Users` de MySQL. Los botones de la pantalla de bienvenida deben redirigir a formularios reales y guardar/validar credenciales en la base de datos.
@@ -121,24 +121,24 @@ Usuario llena formulario → POST /api/auth/login
 
 ---
 
-### ⏳ Sprint 4: Carrito de Compras
-**Avance:** `[████------] 40%` — **En Progreso**
+### ✅ Sprint 4: Carrito de Compras
+**Avance:** `[██████████] 100%` — **¡COMPLETADO!**
 
 #### Objetivo
 Permitir al usuario agregar, quitar y modificar productos en su carrito.
 
 #### Tareas Planificadas
 
-| # | Tarea | Archivos |
-|---|---|---|
-| 1 | Agregar botón 'Añadir al Carrito' en `Catalog.jsx` | ✅ Hecho |
-| 2 | Lógica de contexto global para el carrito (React Context) | ✅ Hecho |
-| 3 | Implementar Badge de cantidad en `BottomNav.jsx` | ✅ Hecho |
-| 4 | Crear pantalla `Cart.jsx` con listado de ítems | `frontend/src/pages/Cart.jsx`, `Cart.css` |
-| 4 | Controles de cantidad (+/-) y eliminación de productos | `Cart.jsx` |
-| 5 | Cálculo de subtotal, costo de envío y total | `Cart.jsx` |
-| 6 | Endpoint `POST /api/orders` para crear pedido | `backend-api/src/controllers/orderController.js` |
-| 7 | Insertar en tablas `Orders` y `Order_Items` de la BD | `orderController.js` |
+| # | Tarea | Estado | Archivos |
+|---|---|---|---|
+| 1 | Agregar botón 'Añadir al Carrito' en `Catalog.jsx` | ✅ Hecho | `Catalog.jsx` |
+| 2 | Lógica de contexto global para el carrito (React Context) | ✅ Hecho | `CartContext.jsx` |
+| 3 | Implementar Badge de cantidad en `BottomNav.jsx` | ✅ Hecho | `BottomNav.jsx` |
+| 4 | Crear pantalla `Cart.jsx` con listado de ítems | ✅ Hecho | `frontend/src/pages/Cart.jsx`, `Cart.css` |
+| 5 | Controles de cantidad (+/-) y eliminación de productos | ✅ Hecho | `Cart.jsx` |
+| 6 | Cálculo de subtotal, costo de envío y total | ✅ Hecho | `Cart.jsx` |
+| 7 | Endpoint `POST /api/orders` para crear pedido | ✅ Hecho | `backend-api/src/controllers/orderController.js` |
+| 8 | Insertar en tablas `Orders` y `Order_Items` de la BD | ✅ Hecho | `orderController.js` |
 
 ---
 
@@ -204,14 +204,15 @@ Asegurar la calidad del producto y prepararlo para su publicación en tiendas.
 |---|---|---|---|
 | Sprint 1 | Fundamentos y Estructura Base | ✅ Completado | 100% |
 | Sprint 2 | Catálogo y Navegación | ✅ Completado | 100% |
-| Sprint 3 | Autenticación con Base de Datos | ✅ Casi Completo | 95% |
-| Sprint 4 | Carrito de Compras | ⏳ Pendiente | 0% |
+| Sprint 3 | Autenticación con Base de Datos | ✅ Completado | 100% |
+| Sprint 4 | Carrito de Compras | ✅ Completado | 100% |
 | Sprint 5 | Pagos y Seguimiento | ⏳ Pendiente | 0% |
 | Sprint 6 | Perfil y Favoritos | ⏳ Pendiente | 0% |
 | Sprint 7 | Pruebas y Lanzamiento | ⏳ Pendiente | 0% |
 
-**Progreso Total del Proyecto: ~42%**
+**Progreso Total del Proyecto: ~57%**
 
 ---
 
 *Plan de Desarrollo SweetBox — Actualizado Junio 2026*
+

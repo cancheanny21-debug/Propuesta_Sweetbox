@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Catalog from './pages/Catalog';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit'; // Importamos el nuevo componente
+import Cart from './pages/Cart'; // Importamos el componente del carrito
 import { CartProvider } from './context/CartContext'; // Importamos el proveedor del carrito
 import BottomNav from './components/BottomNav';
 
@@ -92,6 +93,17 @@ function AppContent() {
             </PrivateRoute>
           }
         />
+
+        {/* Carrito de Compras (protegido) */}
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute isAuth={isAuth}>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
+
         {/* Ruta comodín → redirige al inicio */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

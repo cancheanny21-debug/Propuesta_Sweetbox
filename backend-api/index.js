@@ -16,8 +16,10 @@ app.use(express.json());
 try {
   const productRoutes = require('./src/routes/productRoutes');
   const authRoutes = require('./src/routes/authRoutes');
+  const orderRoutes = require('./src/routes/orderRoutes');
   app.use('/api', productRoutes);
   app.use('/api/auth', authRoutes);
+  app.use('/api', orderRoutes);
 } catch (error) {
   console.error('❌ Error crítico al cargar las rutas:', error.message);
   console.error('Asegúrate de que los archivos en src/routes/ y src/controllers/ existan.');

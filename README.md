@@ -3,7 +3,7 @@
 > Plataforma de compra y venta de postres artesanales con catálogo digital, carrito de compras y seguimiento de pedidos en tiempo real.
 
 ![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-orange)
-![Sprint](https://img.shields.io/badge/Sprint%20Actual-3%20%E2%80%94%20Autenticación-blue)
+![Sprint](https://img.shields.io/badge/Sprint%20Actual-5%20%E2%80%94%20Pagos%20y%20Seguimiento-blue)
 ![Licencia](https://img.shields.io/badge/Licencia-ISC-green)
 
 ---
@@ -117,10 +117,12 @@ backend-api/
     │   └── setupDb.js          ← Script para inicializar la BD desde cero
     ├── controllers/
     │   ├── authController.js   ← Lógica de register/login con JWT
-    │   └── productController.js← Consultas SQL de productos con JOIN
+    │   ├── productController.js← Consultas SQL de productos con JOIN
+    │   └── orderController.js  ← Registro transaccional de pedidos en MySQL
     └── routes/
         ├── authRoutes.js       ← POST /api/auth/register, POST /api/auth/login
-        └── productRoutes.js    ← GET /api/products
+        ├── productRoutes.js    ← GET /api/products
+        └── orderRoutes.js      ← POST /api/orders
 ```
 
 #### Express v5
@@ -201,13 +203,16 @@ Propuesta_Sweetbox/
 ├── frontend/                   ← App React (SPA + Capacitor)
 │   ├── src/
 │   │   ├── pages/              ← Vistas completas de la app
-│   │   │   ├── Welcome.jsx     ← Pantalla de bienvenida
+│   │   │   ├── Welcome.jsx     ← Pantalla de bienvenida con login social
 │   │   │   ├── Login.jsx       ← Inicio de sesión
 │   │   │   ├── Register.jsx    ← Registro de usuario
 │   │   │   ├── Catalog.jsx     ← Catálogo de productos
+│   │   │   ├── Cart.jsx        ← Carrito de compras
 │   │   │   └── Profile.jsx     ← Perfil y cierre de sesión
 │   │   ├── components/
 │   │   │   └── BottomNav.jsx   ← Navegación inferior (Home, Favoritos, Carrito, Perfil)
+│   │   ├── context/
+│   │   │   └── CartContext.jsx ← Proveedor global de carrito
 │   │   ├── assets/             ← Imágenes y logo
 │   │   ├── App.jsx             ← Router principal + rutas protegidas
 │   │   └── index.css           ← Variables CSS globales y tema visual
@@ -310,7 +315,9 @@ npx cap open ios       # Abre Xcode (solo en macOS)
 | `GET` | `/api/health` | Verificación de estado del servidor | ❌ |
 | `POST` | `/api/auth/register` | Registrar nuevo usuario | ❌ |
 | `POST` | `/api/auth/login` | Iniciar sesión — devuelve JWT | ❌ |
+| `GET` | `/api/auth/profile` | Datos de perfil de usuario | ✅ JWT |
 | `GET` | `/api/products` | Listar todos los productos | ✅ JWT |
+| `POST` | `/api/orders` | Crear un pedido con transacciones | ✅ JWT |
 
 > Los endpoints marcados con ✅ requieren el header `Authorization: Bearer <token>`.
 
@@ -322,13 +329,13 @@ npx cap open ios       # Abre Xcode (solo en macOS)
 |---|---|---|---|
 | 1 | Fundamentos, estructura base y BD | ✅ Completado | 100% |
 | 2 | Catálogo de productos desde MySQL | ✅ Completado | 100% |
-| 3 | Autenticación real con JWT + Perfil | 🔄 En progreso | ~70% |
-| 4 | Carrito de Compras y Órdenes | ⏳ Pendiente | 0% |
+| 3 | Autenticación real con JWT + Perfil | ✅ Completado | 100% |
+| 4 | Carrito de Compras y Órdenes | ✅ Completado | 100% |
 | 5 | Pagos y Seguimiento de Pedido | ⏳ Pendiente | 0% |
 | 6 | Favoritos completo | ⏳ Pendiente | 0% |
 | 7 | Pruebas QA y Lanzamiento en Stores | ⏳ Pendiente | 0% |
 
-**Progreso total del proyecto: ~40%**
+**Progreso total del proyecto: ~57%**
 
 ---
 

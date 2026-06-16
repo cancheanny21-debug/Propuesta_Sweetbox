@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 import './BottomNav.css';
 
 const BottomNav = ({ activeTab, onTabChange }) => {
-  const { totalItems } = useCart();
+  const { cartCount } = useCart();
 
   return (
     <nav className="bottom-nav">
@@ -29,8 +29,8 @@ const BottomNav = ({ activeTab, onTabChange }) => {
       >
         <div className="nav-icon-wrapper">
           <span className="nav-icon">🛒</span>
-          {totalItems > 0 && (
-            <span className="cart-badge">{totalItems}</span>
+          {cartCount > 0 && (
+            <span className="cart-badge">{cartCount}</span>
           )}
         </div>
         <span className="nav-label">Carrito</span>

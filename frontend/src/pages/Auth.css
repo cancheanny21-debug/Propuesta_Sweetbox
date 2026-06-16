@@ -250,3 +250,111 @@
   color: #00a878;
   text-decoration: underline;
 }
+
+/* ── Divisor social ──────────────────────── */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 1.2rem 0 1rem;
+}
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ddd, transparent);
+}
+.divider-text {
+  font-size: 12px;
+  color: #aaa;
+  font-weight: 500;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+/* ── Botones de redes sociales ───────────── */
+.social-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 16px;
+  border-radius: 50px;
+  border: 1.5px solid #eee;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ripple hover overlay */
+.social-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Google */
+.social-btn--google {
+  color: #444;
+}
+.social-btn--google::before {
+  background: rgba(66, 133, 244, 0.06);
+}
+.social-btn--google:hover {
+  border-color: #4285F4;
+  box-shadow: 0 4px 18px rgba(66, 133, 244, 0.18);
+  transform: translateY(-2px);
+}
+.social-btn--google:hover::before {
+  opacity: 1;
+}
+.social-btn--google:active {
+  transform: scale(0.97);
+}
+
+/* Facebook */
+.social-btn--facebook {
+  color: #1877F2;
+}
+.social-btn--facebook::before {
+  background: rgba(24, 119, 242, 0.06);
+}
+.social-btn--facebook:hover {
+  border-color: #1877F2;
+  background: #f0f6ff;
+  box-shadow: 0 4px 18px rgba(24, 119, 242, 0.2);
+  transform: translateY(-2px);
+}
+.social-btn--facebook:hover::before {
+  opacity: 1;
+}
+.social-btn--facebook:active {
+  transform: scale(0.97);
+}
