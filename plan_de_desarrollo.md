@@ -94,7 +94,7 @@ Implementar registro e inicio de sesión funcional, conectado a la tabla `Users`
 | 5 | Instalar `axios` en frontend | ✅ Hecho | `frontend/package.json` |
 | 6 | Crear página `Register.jsx` con formulario | ✅ Hecho | `frontend/src/pages/Register.jsx` |
 | 7 | Crear página `Login.jsx` con formulario | ✅ Hecho | `frontend/src/pages/Login.jsx` |
-| 8 | Conectar `Welcome.jsx` a las rutas `/register` y `/login` | 🔄 En progreso | `frontend/src/pages/Welcome.jsx` |
+| 8 | Conectar `Welcome.jsx` a las rutas `/register`, `/login` e iconos sociales | ✅ Hecho | `frontend/src/pages/Welcome.jsx` |
 | 9 | Guardar token JWT en `localStorage` al iniciar sesión | ✅ Hecho | `frontend/src/pages/Login.jsx` |
 | 10 | Proteger la ruta `/catalog` (solo usuarios autenticados) | ✅ Hecho | `frontend/src/App.jsx` |
 | 11 | Implementar Cierre de Sesión y navegación de Perfil | ✅ Hecho | `Profile.jsx`, `App.jsx` |
@@ -122,7 +122,7 @@ Usuario llena formulario → POST /api/auth/login
 ---
 
 ### ⏳ Sprint 4: Carrito de Compras
-**Avance:** `[----------] 0%` — **Pendiente**
+**Avance:** `[████------] 40%` — **En Progreso**
 
 #### Objetivo
 Permitir al usuario agregar, quitar y modificar productos en su carrito.
@@ -131,12 +131,14 @@ Permitir al usuario agregar, quitar y modificar productos en su carrito.
 
 | # | Tarea | Archivos |
 |---|---|---|
-| 1 | Crear pantalla `Cart.jsx` con listado de ítems | `frontend/src/pages/Cart.jsx`, `Cart.css` |
-| 2 | Lógica de contexto global para el carrito (React Context) | `frontend/src/context/CartContext.jsx` |
-| 3 | Controles de cantidad (+/-) y eliminación de productos | `Cart.jsx` |
-| 4 | Cálculo de subtotal, costo de envío y total | `Cart.jsx` |
-| 5 | Endpoint `POST /api/orders` para crear pedido | `backend-api/src/controllers/orderController.js` |
-| 6 | Insertar en tablas `Orders` y `Order_Items` de la BD | `orderController.js` |
+| 1 | Agregar botón 'Añadir al Carrito' en `Catalog.jsx` | ✅ Hecho |
+| 2 | Lógica de contexto global para el carrito (React Context) | ✅ Hecho |
+| 3 | Implementar Badge de cantidad en `BottomNav.jsx` | ✅ Hecho |
+| 4 | Crear pantalla `Cart.jsx` con listado de ítems | `frontend/src/pages/Cart.jsx`, `Cart.css` |
+| 4 | Controles de cantidad (+/-) y eliminación de productos | `Cart.jsx` |
+| 5 | Cálculo de subtotal, costo de envío y total | `Cart.jsx` |
+| 6 | Endpoint `POST /api/orders` para crear pedido | `backend-api/src/controllers/orderController.js` |
+| 7 | Insertar en tablas `Orders` y `Order_Items` de la BD | `orderController.js` |
 
 ---
 

@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Catalog from './pages/Catalog';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit'; // Importamos el nuevo componente
+import { CartProvider } from './context/CartContext'; // Importamos el proveedor del carrito
 import BottomNav from './components/BottomNav';
 
 // ─── Ruta protegida: solo accesible con token JWT ─────────────────────────────
@@ -23,12 +24,14 @@ function AppContent() {
   const getActiveTab = () => {
     if (location.pathname === '/catalog') return 'home';
     if (location.pathname === '/profile') return 'profile';
+    if (location.pathname === '/cart') return 'cart';
     return 'home';
   };
 
   const handleTabChange = (tab) => {
     if (tab === 'home') navigate('/catalog');
     if (tab === 'profile') navigate('/profile');
+    if (tab === 'cart') navigate('/cart');
     // Favoritos y Carrito se implementarán en sprints posteriores
   };
 
@@ -107,7 +110,9 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
     </Router>
   );
 }
