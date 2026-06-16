@@ -4,8 +4,9 @@ const mysql = require('mysql2/promise');
 require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 (async () => {
+  let connection;
   try {
-    const connection = await mysql.createConnection({
+    connection = await mysql.createConnection({
       host: process.env.DB_HOST,
       port: process.env.DB_PORT || 3306,
       user: process.env.DB_USER,
@@ -16,14 +17,15 @@ require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
     const sqlPath = path.join(__dirname, 'init.sql');
     const sql = fs.readFileSync(sqlPath, 'utf8');
-    
+
     console.log('⏳ Ejecutando script de inicialización en MySQL...');
     await connection.query(sql);
-    
+
     console.log('✅ Tablas creadas e inicializadas con éxito en la base de datos.');
-    process.exit(0);
   } catch (error) {
     console.error('❌ Error al inicializar la base de datos:', error.message);
-    process.exit(1);
+  } finally {
+    if (connection) await connection.end();
+    process.exit(0);
   }
 })();

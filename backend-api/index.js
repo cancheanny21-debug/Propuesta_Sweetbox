@@ -13,10 +13,15 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas de la API
-const productRoutes = require('./src/routes/productRoutes');
-const authRoutes = require('./src/routes/authRoutes');
-app.use('/api', productRoutes);
-app.use('/api/auth', authRoutes);
+try {
+  const productRoutes = require('./src/routes/productRoutes');
+  const authRoutes = require('./src/routes/authRoutes');
+  app.use('/api', productRoutes);
+  app.use('/api/auth', authRoutes);
+} catch (error) {
+  console.error('❌ Error crítico al cargar las rutas:', error.message);
+  console.error('Asegúrate de que los archivos en src/routes/ y src/controllers/ existan.');
+}
 
 // Ruta de prueba
 app.get('/api/health', (req, res) => {
