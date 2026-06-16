@@ -1,5 +1,5 @@
 # Plan de Desarrollo: SweetBox
-**Metodología:** Scrum — Sprints de 2 semanas | **Estado:** Sprint 2 completado
+**Metodología:** Scrum — Sprints de 2 semanas | **Estado:** Sprint 3 en fase final
 
 ---
 
@@ -77,29 +77,27 @@ Mostrar el catálogo de productos real desde la base de datos MySQL.
 
 ---
 
-### 🔄 Sprint 3: Autenticación Real con Base de Datos
-**Avance:** `[████------] 40%` — **EN PROGRESO**
+### ✅ Sprint 3: Autenticación Real con Base de Datos
+**Avance:** `[█████████-] 95%` — **COMPLETANDO**
 
 #### Objetivo
 Implementar registro e inicio de sesión funcional, conectado a la tabla `Users` de MySQL. Los botones de la pantalla de bienvenida deben redirigir a formularios reales y guardar/validar credenciales en la base de datos.
-
-#### Problema Actual
-La pantalla `Welcome.jsx` navega directamente al catálogo **sin autenticación real**. Los botones "Crear Cuenta" e "Iniciar Sesión" no están conectados a la base de datos.
 
 #### Tareas
 
 | # | Tarea | Estado | Archivos |
 |---|---|---|---|
-| 1 | Instalar `bcryptjs` y `jsonwebtoken` en backend | ⏳ Pendiente | `backend-api/package.json` |
-| 2 | Crear `authController.js` (lógica de registro y login) | ⏳ Pendiente | `backend-api/src/controllers/authController.js` |
-| 3 | Crear `authRoutes.js` (rutas `/register` y `/login`) | ⏳ Pendiente | `backend-api/src/routes/authRoutes.js` |
-| 4 | Registrar las rutas de auth en el servidor | ⏳ Pendiente | `backend-api/index.js` |
-| 5 | Instalar `axios` en frontend | ⏳ Pendiente | `frontend/package.json` |
-| 6 | Crear página `Register.jsx` con formulario | ⏳ Pendiente | `frontend/src/pages/Register.jsx` |
-| 7 | Crear página `Login.jsx` con formulario | ⏳ Pendiente | `frontend/src/pages/Login.jsx` |
-| 8 | Conectar `Welcome.jsx` a las rutas `/register` y `/login` | ⏳ Pendiente | `frontend/src/pages/Welcome.jsx` |
-| 9 | Guardar token JWT en `localStorage` al iniciar sesión | ⏳ Pendiente | `frontend/src/pages/Login.jsx` |
-| 10 | Proteger la ruta `/catalog` (solo usuarios autenticados) | ⏳ Pendiente | `frontend/src/App.jsx` |
+| 1 | Instalar `bcryptjs` y `jsonwebtoken` en backend | ✅ Hecho | `backend-api/package.json` |
+| 2 | Crear `authController.js` (lógica de registro y login) | ✅ Hecho | `backend-api/src/controllers/authController.js` |
+| 3 | Crear `authRoutes.js` (rutas `/register` y `/login`) | ✅ Hecho | `backend-api/src/routes/authRoutes.js` |
+| 4 | Registrar las rutas de auth en el servidor | ✅ Hecho | `backend-api/index.js` |
+| 5 | Instalar `axios` en frontend | ✅ Hecho | `frontend/package.json` |
+| 6 | Crear página `Register.jsx` con formulario | ✅ Hecho | `frontend/src/pages/Register.jsx` |
+| 7 | Crear página `Login.jsx` con formulario | ✅ Hecho | `frontend/src/pages/Login.jsx` |
+| 8 | Conectar `Welcome.jsx` a las rutas `/register` y `/login` | 🔄 En progreso | `frontend/src/pages/Welcome.jsx` |
+| 9 | Guardar token JWT en `localStorage` al iniciar sesión | ✅ Hecho | `frontend/src/pages/Login.jsx` |
+| 10 | Proteger la ruta `/catalog` (solo usuarios autenticados) | ✅ Hecho | `frontend/src/App.jsx` |
+| 11 | Implementar Cierre de Sesión y navegación de Perfil | ✅ Hecho | `Profile.jsx`, `App.jsx` |
 
 #### Flujo de Registro (Base de Datos)
 ```
@@ -204,13 +202,13 @@ Asegurar la calidad del producto y prepararlo para su publicación en tiendas.
 |---|---|---|---|
 | Sprint 1 | Fundamentos y Estructura Base | ✅ Completado | 100% |
 | Sprint 2 | Catálogo y Navegación | ✅ Completado | 100% |
-| Sprint 3 | Autenticación con Base de Datos | 🔄 En progreso | 40% |
+| Sprint 3 | Autenticación con Base de Datos | ✅ Casi Completo | 95% |
 | Sprint 4 | Carrito de Compras | ⏳ Pendiente | 0% |
 | Sprint 5 | Pagos y Seguimiento | ⏳ Pendiente | 0% |
 | Sprint 6 | Perfil y Favoritos | ⏳ Pendiente | 0% |
 | Sprint 7 | Pruebas y Lanzamiento | ⏳ Pendiente | 0% |
 
-**Progreso Total del Proyecto: ~35%**
+**Progreso Total del Proyecto: ~42%**
 
 ---
 
