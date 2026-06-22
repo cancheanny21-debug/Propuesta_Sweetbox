@@ -6,6 +6,20 @@
 
 ---
 
+## Fases de los Sprints
+
+| Sprint | Nombre | Estado | Progreso |
+| :--- | :--- | :---: | :---: |
+| **Sprint 1** | Fundamentos y Autenticación | ✅ Completado | `[██████████] 100%` |
+| **Sprint 2** | Catálogo y Navegación | ✅ Completado | `[██████████] 100%` |
+| **Sprint 3** | Autenticación Real con Base de Datos | ✅ Completado | `[██████████] 100%` |
+| **Sprint 4** | Carrito de Compras | ✅ Completado | `[██████████] 100%` |
+| **Sprint 5** | Pagos y Seguimiento de Pedido | ⏳ Pendiente | `[----------] 0%` |
+| **Sprint 6** | Perfil y Favoritos | ⏳ Pendiente | `[----------] 0%` |
+| **Sprint 7** | Pruebas y Lanzamiento | ⏳ Pendiente | `[----------] 0%` |
+
+---
+
 ## Tareas (Backlog)
 
 ### 🔴 Pendiente (To Do)
