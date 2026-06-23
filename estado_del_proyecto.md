@@ -1,8 +1,8 @@
 # Estado del Proyecto: SweetBox
 
 ## Progreso General
-**Estado Actual:** En Desarrollo (Fase 5 Completada — Pagos y Seguimiento)
-**Porcentaje Completado:** ~71%
+**Estado Actual:** En Desarrollo (Fase 6 Completada — Perfil y Favoritos)
+**Porcentaje Completado:** ~85%
 
 ---
 
@@ -15,7 +15,7 @@
 | **Sprint 3** | Autenticación Real con Base de Datos | ✅ Completado | `[██████████] 100%` |
 | **Sprint 4** | Carrito de Compras | ✅ Completado | `[██████████] 100%` |
 | **Sprint 5** | Pagos y Seguimiento de Pedido | ✅ Completado | `[██████████] 100%` |
-| **Sprint 6** | Perfil y Favoritos | ⏳ Pendiente | `[----------] 0%` |
+| **Sprint 6** | Perfil y Favoritos | ✅ Completado | `[██████████] 100%` |
 | **Sprint 7** | Pruebas y Lanzamiento | ⏳ Pendiente | `[----------] 0%` |
 
 ---
@@ -24,9 +24,11 @@
 
 ### 🔴 Pendiente (To Do)
 - [ ] Desarrollar Pantalla: Detalle del Producto (detalles de ingredientes, etc.).
-- [ ] Pantalla de Favoritos `Favorites.jsx` y endpoints del backend (Fase 6).
 
 ### 🟢 Completado (Done)
+- [x] Pantalla de Favoritos `Favorites.jsx` y endpoints del backend (Fase 6).
+- [x] Crear endpoints para actualización de perfil (`PUT /api/auth/profile`) y consultar pedidos (`GET /api/orders`) del usuario.
+- [x] Crear formulario de edición de perfil interactivo y conectarlo en `ProfileEdit.jsx`.
 - [x] Inicializar el repositorio con el proyecto React.js base y agregar Capacitor.
 - [x] Configurar la base de datos MySQL y crear las tablas iniciales.
 - [x] Crear el backend (API) para conectar React.js con MySQL.
@@ -48,7 +50,7 @@
 - [x] Creación y actualización del Estado del Proyecto (`estado_del_proyecto.md`).
 - [x] Crear pantalla `Checkout.jsx` con selección de método de pago (Efectivo, Tarjeta, Stripe, PayPal simulado).
 - [x] Crear pantalla `Tracking.jsx` con mapa SVG animado y timeline de estados del pedido.
-- [x] Agregar endpoints `GET /api/orders/:id` y `PATCH /api/orders/:id/status` al backend.
+- [x] Agregar endpoints `GET /api/orders/:id` and `PATCH /api/orders/:id/status` al backend.
 - [x] Registrar rutas `/checkout` y `/tracking` en `App.jsx`.
 - [x] Simplificar `Cart.jsx` para redirigir al flujo de pago.
 

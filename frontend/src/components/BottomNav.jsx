@@ -1,9 +1,11 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 import './BottomNav.css';
 
 const BottomNav = ({ activeTab, onTabChange }) => {
   const { cartCount } = useCart();
+  const { favoritesCount } = useFavorites();
 
   return (
     <nav className="bottom-nav">
@@ -19,7 +21,12 @@ const BottomNav = ({ activeTab, onTabChange }) => {
         className={`nav-item ${activeTab === 'favorites' ? 'active' : ''}`}
         onClick={() => onTabChange('favorites')}
       >
-        <span className="nav-icon">❤️</span>
+        <div className="nav-icon-wrapper">
+          <span className="nav-icon">❤️</span>
+          {favoritesCount > 0 && (
+            <span className="favorites-badge">{favoritesCount}</span>
+          )}
+        </div>
         <span className="nav-label">Favoritos</span>
       </div>
 

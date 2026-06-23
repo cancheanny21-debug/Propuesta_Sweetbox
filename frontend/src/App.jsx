@@ -9,7 +9,9 @@ import ProfileEdit from './pages/ProfileEdit';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';   // Sprint 5
 import Tracking from './pages/Tracking';   // Sprint 5
+import Favorites from './pages/Favorites'; // Sprint 6
 import { CartProvider } from './context/CartContext';
+import { FavoritesProvider } from './context/FavoritesContext'; // Sprint 6
 import BottomNav from './components/BottomNav';
 
 // ─── Ruta protegida: solo accesible con token JWT ─────────────────────────────
@@ -28,6 +30,7 @@ function AppContent() {
     if (location.pathname === '/catalog') return 'home';
     if (location.pathname === '/profile') return 'profile';
     if (location.pathname === '/cart') return 'cart';
+    if (location.pathname === '/favorites') return 'favorites';
     return 'home';
   };
 
@@ -35,7 +38,7 @@ function AppContent() {
     if (tab === 'home') navigate('/catalog');
     if (tab === 'profile') navigate('/profile');
     if (tab === 'cart') navigate('/cart');
-    // Favoritos y Carrito se implementarán en sprints posteriores
+    if (tab === 'favorites') navigate('/favorites');
   };
 
   const handleLogout = () => {
@@ -57,7 +60,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="app-container" style={{ paddingBottom: isAuth ? '70px' : '0' }}>
+    <div className="app-container" style={{ paddingBottom: isAuth && !['/', '/login', '/register'].includes(location.pathname) ? '70px' : '0' }}>
       <Routes>
         {/* Pantalla de bienvenida (pública) */}
         <Route path="/" element={<Welcome />} />
@@ -106,6 +109,16 @@ function AppContent() {
           }
         />
 
+        {/* Favoritos (Sprint 6, protegido) */}
+        <Route
+          path="/favorites"
+          element={
+            <PrivateRoute isAuth={isAuth}>
+              <Favorites />
+            </PrivateRoute>
+          }
+        />
+
         {/* Checkout — Pagos (Sprint 5, protegido) */}
         <Route
           path="/checkout"
@@ -130,8 +143,8 @@ function AppContent() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
-      {/* Barra de navegación solo si el usuario está autenticado */}
-      {isAuth && (
+      {/* Barra de navegación solo si el usuario está autenticado y no está en pantallas públicas */}
+      {isAuth && !['/', '/login', '/register'].includes(location.pathname) && (
         <BottomNav
           activeTab={getActiveTab()}
           onTabChange={handleTabChange}
@@ -145,7 +158,9 @@ function App() {
   return (
     <Router>
       <CartProvider>
-        <AppContent />
+        <FavoritesProvider>
+          <AppContent />
+        </FavoritesProvider>
       </CartProvider>
     </Router>
   );

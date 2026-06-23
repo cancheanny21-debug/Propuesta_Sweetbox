@@ -125,8 +125,23 @@ const updateOrderStatus = async (req, res) => {
   }
 };
 
+const getUserOrders = async (req, res) => {
+  const userId = req.userId;
+  try {
+    const [orders] = await db.query(
+      'SELECT * FROM Orders WHERE user_id = ? ORDER BY created_at DESC',
+      [userId]
+    );
+    res.json(orders);
+  } catch (error) {
+    console.error('Error al obtener pedidos del usuario:', error.message);
+    res.status(500).json({ error: 'Error interno al obtener los pedidos.' });
+  }
+};
+
 module.exports = {
   createOrder,
   getOrderById,
   updateOrderStatus,
+  getUserOrders,
 };

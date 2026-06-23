@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 import './Catalog.css';
 
 // ─── Configuración visual por categoría ────────────────────────────────────
@@ -26,6 +27,7 @@ const Catalog = () => {
   const [addedMap, setAddedMap]             = useState({});
   const [gridKey, setGridKey]               = useState(0);
   const { addToCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
   const location = useLocation();
   const navigate = useNavigate();
   const gridRef  = useRef(null);
@@ -232,7 +234,13 @@ const Catalog = () => {
                     className="product-image"
                     loading="lazy"
                   />
-                  <button className="favorite-button" aria-label="Añadir a favoritos">❤️</button>
+                  <button
+                    className={`favorite-button ${isFavorite(product.id) ? 'active' : ''}`}
+                    onClick={() => toggleFavorite(product)}
+                    aria-label={isFavorite(product.id) ? "Quitar de favoritos" : "Añadir a favoritos"}
+                  >
+                    {isFavorite(product.id) ? '❤️' : '🤍'}
+                  </button>
                   <div className="product-category-badge">
                     {pCfg.icon} {product.categoria_nombre}
                   </div>

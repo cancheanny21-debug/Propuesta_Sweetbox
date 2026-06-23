@@ -111,4 +111,43 @@ const getProfile = async (req, res) => {
   }
 };
 
-module.exports = { register, login, getProfile };
+// ─── ACTUALIZAR PERFIL ────────────────────────────────────────────────────────
+const updateProfile = async (req, res) => {
+  const { nombre, password } = req.body;
+
+  if (!nombre) {
+    return res.status(400).json({ error: 'El nombre es requerido.' });
+  }
+
+  try {
+    if (password && password.trim() !== '') {
+      const passwordHash = await bcrypt.hash(password, 10);
+      await db.query(
+        'UPDATE Users SET nombre = ?, password = ? WHERE id = ?',
+        [nombre, passwordHash, req.userId]
+      );
+    } else {
+      await db.query(
+        'UPDATE Users SET nombre = ? WHERE id = ?',
+        [nombre, req.userId]
+      );
+    }
+
+    // Obtener los datos actualizados del usuario
+    const [rows] = await db.query(
+      'SELECT id, nombre, correo FROM Users WHERE id = ?',
+      [req.userId]
+    );
+
+    res.json({
+      message: 'Perfil actualizado correctamente.',
+      user: rows[0]
+    });
+
+  } catch (error) {
+    console.error('Error actualizando perfil:', error);
+    res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+};
+
+module.exports = { register, login, getProfile, updateProfile };

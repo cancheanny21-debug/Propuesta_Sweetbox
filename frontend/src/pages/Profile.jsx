@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useFavorites } from '../context/FavoritesContext';
 import './Profile.css';
 import logo from '../assets/logo.png';
 
 const Profile = ({ onLogout }) => {
   const navigate = useNavigate();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const { favoritesCount } = useFavorites();
+  const [ordersCount, setOrdersCount] = useState(0);
 
   // Obtener datos del usuario desde localStorage
   const rawUser = localStorage.getItem('sweetbox_user');
@@ -14,6 +18,22 @@ const Profile = ({ onLogout }) => {
   const initials = user?.nombre
     ? user.nombre.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
     : '??';
+
+  useEffect(() => {
+    const token = localStorage.getItem('sweetbox_token');
+    if (!token) return;
+
+    axios
+      .get('http://localhost:3000/api/orders', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setOrdersCount(res.data.length || 0);
+      })
+      .catch((err) => {
+        console.error('Error al obtener el conteo de pedidos:', err);
+      });
+  }, []);
 
   const handleLogout = () => {
     // Limpiar sesión
@@ -59,12 +79,12 @@ const Profile = ({ onLogout }) => {
       <div className="profile-stats">
         <div className="profile-stat-card">
           <span className="stat-icon">📦</span>
-          <span className="stat-value">0</span>
+          <span className="stat-value">{ordersCount}</span>
           <span className="stat-label">Pedidos</span>
         </div>
-        <div className="profile-stat-card">
+        <div className="profile-stat-card" onClick={() => navigate('/favorites')} style={{ cursor: 'pointer' }}>
           <span className="stat-icon">❤️</span>
-          <span className="stat-value">0</span>
+          <span className="stat-value">{favoritesCount}</span>
           <span className="stat-label">Favoritos</span>
         </div>
         <div className="profile-stat-card">
