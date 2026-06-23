@@ -3,7 +3,7 @@
 > Plataforma de compra y venta de postres artesanales con catálogo digital, carrito de compras y seguimiento de pedidos en tiempo real.
 
 ![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-orange)
-![Sprint](https://img.shields.io/badge/Sprint%20Actual-5%20%E2%80%94%20Pagos%20y%20Seguimiento-blue)
+![Sprint](https://img.shields.io/badge/Sprint%20Actual-6%20%E2%80%94%20Perfil%20y%20Favoritos-blue)
 ![Licencia](https://img.shields.io/badge/Licencia-ISC-green)
 
 ---
@@ -290,21 +290,31 @@ npm run dev
 # ✅ App disponible en http://localhost:5173
 ```
 
-### 4️⃣ (Opcional) Compilar como App Nativa con Capacitor
+### 4️⃣ Compilar y Ejecutar en Android con Capacitor
+
+Capacitor compila el bundle web de React y lo ejecuta dentro de un WebView nativo en Android.
 
 ```bash
 cd frontend
 
-# Generar el bundle de producción
+# 1. Generar el bundle de producción web (crea dist/)
 npm run build
 
-# Sincronizar con Android / iOS
-npx cap sync android
-npx cap open android   # Abre Android Studio
+# 2. Agregar la plataforma Android (solo la primera vez)
+npx cap add android
 
-npx cap sync ios
-npx cap open ios       # Abre Xcode (solo en macOS)
+# 3. Sincronizar el bundle web con la app de Android
+npx cap sync android
+
+# 4. Abrir el proyecto en Android Studio para emular o compilar
+npx cap open android
 ```
+
+> [!IMPORTANT]
+> **Conectividad con el Backend Local desde Android:**
+> Un emulador o dispositivo Android físico no puede resolver `localhost` para conectar con tu API de Node.js.
+> - **En Emulador:** Usa la IP especial **`http://10.0.2.2:3000`** en tus llamadas de Axios del frontend.
+> - **En Dispositivo Físico:** Conéctate a la misma red Wi-Fi y usa la IP privada de tu computadora (ej. `http://192.168.1.50:3000`).
 
 ---
 
@@ -315,9 +325,11 @@ npx cap open ios       # Abre Xcode (solo en macOS)
 | `GET` | `/api/health` | Verificación de estado del servidor | ❌ |
 | `POST` | `/api/auth/register` | Registrar nuevo usuario | ❌ |
 | `POST` | `/api/auth/login` | Iniciar sesión — devuelve JWT | ❌ |
-| `GET` | `/api/auth/profile` | Datos de perfil de usuario | ✅ JWT |
+| `GET` | `/api/auth/profile` | Datos de perfil del usuario (con estadísticas) | ✅ JWT |
 | `GET` | `/api/products` | Listar todos los productos | ✅ JWT |
 | `POST` | `/api/orders` | Crear un pedido con transacciones | ✅ JWT |
+| `GET` | `/api/orders/:id` | Obtener un pedido detallado con sus ítems | ✅ JWT |
+| `PATCH` | `/api/orders/:id/status`| Actualizar el estado del pedido | ✅ JWT |
 
 > Los endpoints marcados con ✅ requieren el header `Authorization: Bearer <token>`.
 
@@ -331,11 +343,11 @@ npx cap open ios       # Abre Xcode (solo en macOS)
 | 2 | Catálogo de productos desde MySQL | ✅ Completado | 100% |
 | 3 | Autenticación real con JWT + Perfil | ✅ Completado | 100% |
 | 4 | Carrito de Compras y Órdenes | ✅ Completado | 100% |
-| 5 | Pagos y Seguimiento de Pedido | ⏳ Pendiente | 0% |
-| 6 | Favoritos completo | ⏳ Pendiente | 0% |
+| 5 | Pagos y Seguimiento de Pedido | ✅ Completado | 100% |
+| 6 | Perfil y Favoritos completos | ⏳ Pendiente | 0% |
 | 7 | Pruebas QA y Lanzamiento en Stores | ⏳ Pendiente | 0% |
 
-**Progreso total del proyecto: ~57%**
+**Progreso total del proyecto: ~71%**
 
 ---
 

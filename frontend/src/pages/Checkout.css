@@ -1,0 +1,511 @@
+/* ═══════════════════════════════════════════════════════════
+   Checkout.css — Sprint 5: Pantalla de Pago Premium
+   SweetBox 2026
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Contenedor raíz ───────────────────────────────────────── */
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  padding: 1.5rem 1rem 6rem;
+  background: linear-gradient(160deg, #f0f4ff 0%, #fef5ff 55%, #fff0fa 100%);
+  box-sizing: border-box;
+}
+
+.checkout-container.empty-screen,
+.checkout-container.processing-screen {
+  justify-content: center;
+}
+
+/* ── Formas decorativas de fondo ───────────────────────────── */
+.co-bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: 0;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.co-bg-shape.s1 {
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, #c084fc, #818cf8);
+  top: -100px; right: -60px;
+}
+.co-bg-shape.s2 {
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, #fbcfe8, #f9a8d4);
+  bottom: 8%; left: -70px;
+}
+
+/* ── Tarjeta principal ─────────────────────────────────────── */
+.co-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 1.8rem 1.5rem 2rem;
+  box-shadow: 0 12px 40px rgba(129, 140, 248, 0.10), 0 4px 15px rgba(192, 132, 252, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  animation: coSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-sizing: border-box;
+}
+
+@keyframes coSlideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.co-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.2rem;
+}
+
+.co-back-btn {
+  background: none;
+  border: none;
+  color: #6d4aff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.co-back-btn:hover { background: #f0eeff; }
+
+.co-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* ── Steps Indicator ───────────────────────────────────────── */
+.co-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 1.8rem;
+}
+
+.co-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+.co-step.active { opacity: 1; }
+
+.co-step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e0d5ff;
+  color: #7c3aed;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+}
+.co-step.active .co-step-dot {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: white;
+  box-shadow: 0 3px 10px rgba(124, 58, 237, 0.35);
+}
+
+.co-step span {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.co-step-line {
+  width: 60px;
+  height: 2px;
+  background: #e0d5ff;
+  margin: 0 4px;
+  margin-bottom: 14px;
+  border-radius: 2px;
+}
+
+/* ── Contenido del step ────────────────────────────────────── */
+.co-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.co-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 0.3rem;
+}
+
+/* ── Formulario ────────────────────────────────────────────── */
+.co-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.co-form-group label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #555;
+}
+
+.co-form-group input,
+.co-form-group textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #e8e0ff;
+  border-radius: 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1a1a2e;
+  background: #fafafe;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.co-form-group input:focus,
+.co-form-group textarea:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.08);
+  background: #fff;
+}
+
+.co-form-row {
+  display: flex;
+  gap: 12px;
+}
+.co-form-row .co-form-group { flex: 1; }
+
+/* ── Resumen del Pedido ────────────────────────────────────── */
+.co-order-summary {
+  background: #f9f7ff;
+  border: 1px dashed #d8b4fe;
+  border-radius: 18px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.co-summary-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #7c3aed;
+  margin: 0 0 4px;
+}
+
+.co-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.co-summary-img-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #eee;
+}
+.co-summary-img { width: 100%; height: 100%; object-fit: cover; }
+
+.co-summary-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.co-summary-name { font-size: 13px; font-weight: 600; color: #1a1a2e; }
+.co-summary-qty { font-size: 11px; color: #aaa; }
+.co-summary-price { font-size: 13px; font-weight: 700; color: #7c3aed; }
+
+.co-price-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: #666;
+  padding-top: 4px;
+  border-top: 1px solid #ede8ff;
+}
+.co-total-row {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1a1a2e;
+}
+.co-free { color: #059669; font-weight: 700; }
+
+/* ── Métodos de pago ───────────────────────────────────────── */
+.co-payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.co-payment-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 2px solid #e8e0ff;
+  background: #fafafe;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.co-payment-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.co-payment-card.active {
+  border-color: #7c3aed;
+  background: #f3edff;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12);
+  transform: translateY(-1px);
+}
+
+.co-pm-icon { font-size: 20px; flex-shrink: 0; }
+
+.co-pm-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+.co-pm-desc {
+  display: block;
+  font-size: 10px;
+  color: #999;
+}
+
+.co-pm-check {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #7c3aed;
+}
+
+/* ── Tarjeta visual (crédito/débito) ───────────────────────── */
+.co-card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: coSlideUp 0.35s ease;
+}
+
+.co-card-visual {
+  background: linear-gradient(135deg, #6d28d9 0%, #a78bfa 100%);
+  border-radius: 18px;
+  padding: 20px 22px;
+  color: white;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(109, 40, 217, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.co-card-visual::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+
+.co-card-chip { font-size: 22px; opacity: 0.85; }
+
+.co-card-number-display {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  font-family: 'Courier New', monospace;
+  opacity: 0.95;
+}
+
+.co-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  opacity: 0.8;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ── Banner gateway ────────────────────────────────────────── */
+.co-gateway-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: linear-gradient(135deg, #ede9fe, #fce7f3);
+  border: 1px solid #d8b4fe;
+  border-radius: 16px;
+  padding: 14px 16px;
+  animation: coSlideUp 0.35s ease;
+}
+.co-gateway-banner > span { font-size: 26px; }
+.co-gateway-banner strong { font-size: 13px; color: #5b21b6; }
+.co-gateway-banner p { font-size: 11px; color: #888; margin: 2px 0 0; }
+
+/* ── Total final ───────────────────────────────────────────── */
+.co-total-confirm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f3edff;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+.co-total-amount {
+  font-size: 20px;
+  font-weight: 800;
+  color: #7c3aed;
+}
+
+/* ── Botón principal ───────────────────────────────────────── */
+.co-btn-primary {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.30);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+.co-btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(124, 58, 237, 0.38);
+}
+.co-btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* ── Spinner ───────────────────────────────────────────────── */
+.co-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: coSpin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes coSpin { to { transform: rotate(360deg); } }
+
+/* ── Nota de seguridad ─────────────────────────────────────── */
+.co-secure-note {
+  text-align: center;
+  font-size: 11px;
+  color: #aaa;
+  margin: 0;
+}
+
+/* ── Error ─────────────────────────────────────────────────── */
+.co-error {
+  background: #fff0f0;
+  border: 1px solid #ffb3b3;
+  color: #c0392b;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Pantalla vacía ────────────────────────────────────────── */
+.co-empty-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.co-empty-icon { font-size: 52px; }
+.co-empty-card h2 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0; }
+.co-empty-card p  { font-size: 13px; color: #777; margin: 0; }
+
+/* ── Pantalla procesando ───────────────────────────────────── */
+.co-processing-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(124,58,237,0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: coSlideUp 0.45s ease;
+}
+
+.co-processing-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #e0d5ff;
+  border-top-color: #7c3aed;
+  border-radius: 50%;
+  animation: coSpin 0.9s linear infinite;
+}
+.co-processing-title { font-size: 20px; font-weight: 800; color: #1a1a2e; margin: 0; }
+.co-processing-sub   { font-size: 13px; color: #777; margin: 0; line-height: 1.5; }

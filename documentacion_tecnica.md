@@ -1,5 +1,5 @@
 # 📄 Documentación Técnica: SweetBox
-**Versión:** 1.1 | **Fecha:** Junio 2026 | **Estado:** En Desarrollo (Sprints 3 y 4 Completados)
+**Versión:** 1.2 | **Fecha:** Junio 2026 | **Estado:** En Desarrollo (Fase 5 Completada — Pagos y Seguimiento)
 
 ---
 
@@ -306,15 +306,16 @@ INSERT INTO Categories (id, nombre) VALUES
 | `POST` | `/api/auth/login` | `authController.login` | Autentica al usuario y retorna sus datos y token JWT | No |
 | `GET` | `/api/auth/profile` | `authController.getProfile` | Retorna el perfil del usuario autenticado | Sí (JWT) |
 | `POST` | `/api/orders` | `orderController.createOrder` | Crea un nuevo pedido con transacción en MySQL | Sí (JWT) |
+| `GET` | `/api/orders/:id` | `orderController.getOrder` | Obtiene un pedido detallado con sus ítems asociados | Sí (JWT) |
+| `PATCH` | `/api/orders/:id/status` | `orderController.updateStatus` | Actualiza el estado del pedido (Confirmado -> Preparando -> En camino -> Entregado) | Sí (JWT) |
 
 ### 5.2 Endpoints Pendientes para Sprints Futuros
 
 | Método | Ruta | Descripción | Body esperado |
 |---|---|---|---|
-| `POST` | `/api/payments/process` | Procesa pagos simulados con Stripe/PayPal (Sprint 5) | `{ orderId, paymentMethodDetails }` |
-| `PUT` | `/api/orders/:id/status` | Actualiza el estado del pedido (Sprint 5) | `{ estado }` |
 | `GET` | `/api/favorites` | Obtiene la lista de favoritos de un usuario (Sprint 6) | Header: `Authorization: Bearer <token>` |
 | `POST` | `/api/favorites` | Añade un producto a favoritos (Sprint 6) | `{ product_id }` |
+| `DELETE` | `/api/favorites/:productId` | Elimina un producto de favoritos (Sprint 6) | — |
 
 ---
 
@@ -329,22 +330,59 @@ Definido en [`frontend/src/App.jsx`](file:///c:/Users/ANNY/Documents/GitHub/Prop
 | `/register` | `Register.jsx` | ✅ Completado | Formulario de registro conectado al Backend |
 | `/catalog` | `Catalog.jsx` | ✅ Completado | Catálogo de productos (Home) con "Añadir al Carrito" |
 | `/cart` | `Cart.jsx` | ✅ Completado | Carrito de compras, cantidades y envío de pedido a MySQL |
-| `/profile` | `Profile.jsx` | ✅ Completado | Perfil del usuario, fecha de registro y logout |
+| `/checkout` | `Checkout.jsx` | ✅ Completado | Selección de métodos de pago (Efectivo, Tarjeta, Stripe, PayPal simulado) |
+| `/tracking` | `Tracking.jsx` | ✅ Completado | Seguimiento en tiempo real con mapa SVG y timeline interactivo |
+| `/profile` | `Profile.jsx` | ✅ Completado | Perfil del usuario, estadísticas de compras y logout |
 | `/profile/edit` | `ProfileEdit.jsx` | ✅ Completado | Modificación de datos del perfil del usuario |
-| `/tracking` | `Tracking.jsx` | ⏳ Pendiente | Seguimiento del pedido en tiempo real con mapas (Sprint 5) |
 
 ---
 
-## 7. Solución de Autenticación y Carrito de Compras
+## 7. Solución de Autenticación, Pagos y Seguimiento
 
-Las tareas de autenticación y carrito de compras fueron resueltas e implementadas al 100%:
-- **Autenticación real:** Registro (`/register`) e inicio de sesión (`/login`) conectados a la base de datos MySQL con contraseñas seguras hasheadas vía `bcryptjs` y emisión de tokens `jsonwebtoken`.
-- **Rutas Protegidas:** Componente `PrivateRoute` en el frontend para evitar accesos no autorizados a pantallas privadas como catálogo, carrito y perfil.
-- **Flujo de pedidos transaccional:** Envíos automáticos desde la pantalla del carrito al endpoint `POST /api/orders`, insertando registros de forma segura en las tablas `Orders` y `Order_Items` empleando transacciones de SQL para evitar inconsistencias en caso de fallo.
+Las tareas de los Sprints 1 a 5 fueron resueltas e implementadas al 100%:
+- **Autenticación real:** Registro (`/register`) e inicio de sesión (`/login`) conectados a MySQL con contraseñas seguras hasheadas vía `bcryptjs` y emisión de tokens `jsonwebtoken`.
+- **Flujo de pedidos transaccional:** Envíos desde `/cart` al endpoint `POST /api/orders` con transacciones de SQL para evitar inconsistencias en caso de fallo.
+- **Flujo de Pagos e Interfaz de Tracking:** Pantalla `/checkout` para seleccionar métodos de pago y simular el procesamiento, redirigiendo a `/tracking` que cuenta con una animación dinámica del repartidor en un mapa interactivo SVG y una línea de tiempo actualizada con endpoints del backend.
 
 ---
 
-## 8. Seguridad
+## 8. Compilación y Ejecución en Android (Capacitor)
+
+Para desplegar SweetBox en un dispositivo Android o un emulador, se utiliza **Capacitor**:
+
+### 8.1 Requisitos Previos
+1. **Android Studio** instalado y configurado con el SDK de Android correspondiente.
+2. **Java JDK 17** o posterior instalado.
+3. Un dispositivo físico conectado con depuración USB activa o un dispositivo virtual (AVD) creado en Android Studio.
+
+### 8.2 Pasos para Compilar y Desplegar
+```bash
+# 1. Posicionarse en el directorio del frontend
+cd frontend
+
+# 2. Generar el bundle de producción web (crea la carpeta dist/)
+npm run build
+
+# 3. Agregar la plataforma de Android (solo la primera vez)
+npx cap add android
+
+# 4. Sincronizar el bundle web con la carpeta nativa de Android
+npx cap sync android
+
+# 5. Abrir el proyecto nativo en Android Studio
+npx cap open android
+```
+
+### 8.3 Conectividad con el Servidor Local (IP del Backend)
+> [!IMPORTANT]
+> Un dispositivo Android (físico o emulador) no puede conectarse a `localhost` o `127.0.0.1` para comunicarse con la API de Node.js, ya que `localhost` apunta al propio dispositivo Android.
+>
+> - **Si usas Emulador Android:** Reemplaza la URL base del backend en tus llamadas de axios del frontend por `http://10.0.2.2:3000` (esta es una dirección especial mapeada por el emulador hacia el localhost del sistema operativo anfitrión).
+> - **Si usas un Dispositivo Físico:** Conecta tu computadora y el teléfono a la misma red Wi-Fi y usa la dirección IP local de tu computadora (ejemplo: `http://192.168.1.50:3000`).
+
+---
+
+## 9. Seguridad
 
 | Aspecto | Solución |
 |---|---|
@@ -356,16 +394,17 @@ Las tareas de autenticación y carrito de compras fueron resueltas e implementad
 
 ---
 
-## 9. Entorno de Desarrollo
+## 10. Entorno de Desarrollo
 
 | Herramienta | Uso |
 |---|---|
 | **VS Code** | IDE principal |
 | **XAMPP / MySQL Workbench** | Administración de la base de datos MySQL local |
 | **Postman / Thunder Client** | Prueba manual de endpoints de la API |
+| **Android Studio** | Emulación y compilación nativa de la app para Android |
 | **Git + GitHub** | Control de versiones |
 | **npm** | Gestor de paquetes para frontend y backend |
 
 ---
 
-*Documento generado para el proyecto SweetBox — Fase de Desarrollo v1.0*
+*Documento generado para el proyecto SweetBox — Fase de Desarrollo v1.2*

@@ -5,9 +5,11 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Catalog from './pages/Catalog';
 import Profile from './pages/Profile';
-import ProfileEdit from './pages/ProfileEdit'; // Importamos el nuevo componente
-import Cart from './pages/Cart'; // Importamos el componente del carrito
-import { CartProvider } from './context/CartContext'; // Importamos el proveedor del carrito
+import ProfileEdit from './pages/ProfileEdit';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';   // Sprint 5
+import Tracking from './pages/Tracking';   // Sprint 5
+import { CartProvider } from './context/CartContext';
 import BottomNav from './components/BottomNav';
 
 // ─── Ruta protegida: solo accesible con token JWT ─────────────────────────────
@@ -100,6 +102,26 @@ function AppContent() {
           element={
             <PrivateRoute isAuth={isAuth}>
               <Cart />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Checkout — Pagos (Sprint 5, protegido) */}
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute isAuth={isAuth}>
+              <Checkout />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Seguimiento de Pedido (Sprint 5, protegido) */}
+        <Route
+          path="/tracking"
+          element={
+            <PrivateRoute isAuth={isAuth}>
+              <Tracking />
             </PrivateRoute>
           }
         />

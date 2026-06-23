@@ -60,6 +60,73 @@ const createOrder = async (req, res) => {
   }
 };
 
+/**
+ * Obtiene un pedido por ID (con sus items).
+ */
+const getOrderById = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.userId;
+
+  try {
+    const [orders] = await db.query(
+      'SELECT * FROM Orders WHERE id = ? AND user_id = ?',
+      [id, userId]
+    );
+
+    if (orders.length === 0) {
+      return res.status(404).json({ error: 'Pedido no encontrado.' });
+    }
+
+    const [items] = await db.query(
+      `SELECT oi.*, p.nombre, p.url_imagen
+       FROM Order_Items oi
+       JOIN Products p ON oi.product_id = p.id
+       WHERE oi.order_id = ?`,
+      [id]
+    );
+
+    res.json({ order: orders[0], items });
+  } catch (error) {
+    console.error('Error al obtener pedido:', error.message);
+    res.status(500).json({ error: 'Error interno al obtener el pedido.' });
+  }
+};
+
+/**
+ * Actualiza el estado de un pedido.
+ * Estados válidos: 'Confirmado', 'Preparando', 'En camino', 'Entregado'
+ */
+const VALID_STATES = ['Confirmado', 'Preparando', 'En camino', 'Entregado'];
+
+const updateOrderStatus = async (req, res) => {
+  const { id } = req.params;
+  const { estado } = req.body;
+
+  if (!estado || !VALID_STATES.includes(estado)) {
+    return res.status(400).json({
+      error: `Estado inválido. Valores permitidos: ${VALID_STATES.join(', ')}.`
+    });
+  }
+
+  try {
+    const [result] = await db.query(
+      'UPDATE Orders SET estado = ? WHERE id = ?',
+      [estado, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Pedido no encontrado.' });
+    }
+
+    res.json({ message: `Estado actualizado a "${estado}".`, orderId: id, estado });
+  } catch (error) {
+    console.error('Error al actualizar estado:', error.message);
+    res.status(500).json({ error: 'Error interno al actualizar el estado.' });
+  }
+};
+
 module.exports = {
-  createOrder
+  createOrder,
+  getOrderById,
+  updateOrderStatus,
 };

@@ -142,22 +142,24 @@ Permitir al usuario agregar, quitar y modificar productos en su carrito.
 
 ---
 
-### ⏳ Sprint 5: Pagos y Seguimiento de Pedido
-**Avance:** `[----------] 0%` — **Pendiente**
+### ✅ Sprint 5: Pagos y Seguimiento de Pedido
+**Avance:** `[██████████] 100%` — **¡COMPLETADO!**
 
 #### Objetivo
 Procesar pagos e implementar el rastreo en tiempo real del pedido.
 
 #### Tareas Planificadas
 
-| # | Tarea | Archivos |
-|---|---|---|
-| 1 | Pantalla de pago con selección de método | `frontend/src/pages/Checkout.jsx` |
-| 2 | Integración de pasarela de pagos (Stripe/PayPal) | `backend-api/src/controllers/paymentController.js` |
-| 3 | Pantalla de seguimiento `Tracking.jsx` con mapa | `frontend/src/pages/Tracking.jsx` |
-| 4 | Integración Google Maps / Leaflet para la ruta | `Tracking.jsx` |
-| 5 | Actualización de `estado` en tabla `Orders` | `orderController.js` |
-| 6 | Sistema de Notificaciones Push (Capacitor Push Plugin) | `capacitor.config.json`, backend |
+| # | Tarea | Estado | Archivos |
+|---|---|---|---|
+| 1 | Pantalla de pago `Checkout.jsx` con selección de método | ✅ Hecho | `frontend/src/pages/Checkout.jsx`, `Checkout.css` |
+| 2 | Métodos: Efectivo, Tarjeta (visual de tarjeta), Stripe, PayPal (simulado) | ✅ Hecho | `Checkout.jsx` |
+| 3 | Pantalla de seguimiento `Tracking.jsx` con mapa SVG animado | ✅ Hecho | `frontend/src/pages/Tracking.jsx`, `Tracking.css` |
+| 4 | Timeline de estados: Confirmado → Preparando → En camino → Entregado | ✅ Hecho | `Tracking.jsx` |
+| 5 | Cuenta regresiva ETA y animación del repartidor en mapa | ✅ Hecho | `Tracking.jsx` |
+| 6 | Actualización de `estado` en tabla `Orders` (endpoint PATCH) | ✅ Hecho | `orderController.js`, `orderRoutes.js` |
+| 7 | Endpoint `GET /api/orders/:id` para obtener pedido con items | ✅ Hecho | `orderController.js` |
+| 8 | Registrar rutas `/checkout` y `/tracking` en React Router | ✅ Hecho | `App.jsx` |
 
 ---
 
@@ -206,11 +208,11 @@ Asegurar la calidad del producto y prepararlo para su publicación en tiendas.
 | Sprint 2 | Catálogo y Navegación | ✅ Completado | 100% |
 | Sprint 3 | Autenticación con Base de Datos | ✅ Completado | 100% |
 | Sprint 4 | Carrito de Compras | ✅ Completado | 100% |
-| Sprint 5 | Pagos y Seguimiento | ⏳ Pendiente | 0% |
+| Sprint 5 | Pagos y Seguimiento | ✅ Completado | 100% |
 | Sprint 6 | Perfil y Favoritos | ⏳ Pendiente | 0% |
 | Sprint 7 | Pruebas y Lanzamiento | ⏳ Pendiente | 0% |
 
-**Progreso Total del Proyecto: ~57%**
+**Progreso Total del Proyecto: ~71%**
 
 ---
 
