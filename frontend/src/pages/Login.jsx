@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/apiConfig';
 import './Auth.css';
 import logo from '../assets/logo.png';
 
@@ -34,7 +35,7 @@ const Login = ({ onLoginSuccess }) => {
 
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:3000/api/auth/login', {
+      const res = await axios.post(`${API_URL}/api/auth/login`, {
         correo: form.correo,
         password: form.password,
       });

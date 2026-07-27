@@ -9,7 +9,25 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Middlewares
-app.use(cors());
+const allowedOrigins = [
+  process.env.FRONTEND_URL, // e.g., https://sweetbox.vercel.app (opcional si hay web)
+  'http://localhost',       // Default Capacitor iOS/Android
+  'capacitor://localhost',  // Capacitor custom scheme
+  'http://localhost:5173'   // Local development
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Permitir si no hay origen (postman, mobile apps a veces) o si está en la lista
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Rutas de la API

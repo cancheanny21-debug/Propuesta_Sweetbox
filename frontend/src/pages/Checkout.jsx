@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/apiConfig';
 import { useCart } from '../context/CartContext';
 import './Checkout.css';
 
@@ -56,7 +57,7 @@ const Checkout = () => {
       const metodoPagoLabel = PAYMENT_METHODS.find(m => m.id === paymentMethod)?.label || paymentMethod;
 
       const response = await axios.post(
-        'http://localhost:3000/api/orders',
+        `${API_URL}/api/orders`,
         { total: finalTotal, metodo_pago: metodoPagoLabel, direccion: address, items: formattedItems },
         { headers: { Authorization: `Bearer ${token}` } }
       );

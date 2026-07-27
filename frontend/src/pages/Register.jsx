@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/apiConfig';
 import './Auth.css';
 import logo from '../assets/logo.png';
 
@@ -31,7 +32,7 @@ const Register = () => {
 
     setLoading(true);
     try {
-      await axios.post('http://localhost:3000/api/auth/register', {
+      await axios.post(`${API_URL}/api/auth/register`, {
         nombre: form.nombre,
         correo: form.correo,
         password: form.password,

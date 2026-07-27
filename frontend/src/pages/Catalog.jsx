@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import API_URL from '../config/apiConfig';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
@@ -39,7 +40,7 @@ const Catalog = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:3000/api/products', { headers })
+      .get(`${API_URL}/api/products`, { headers })
       .then(res => {
         setAllProducts(res.data);
         setLoading(false);

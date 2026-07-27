@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/apiConfig';
 import { useFavorites } from '../context/FavoritesContext';
 import './Profile.css';
 import logo from '../assets/logo.png';
@@ -24,7 +25,7 @@ const Profile = ({ onLogout }) => {
     if (!token) return;
 
     axios
-      .get('http://localhost:3000/api/orders', {
+      .get(`${API_URL}/api/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../config/apiConfig';
 
 const FavoritesContext = createContext();
 
@@ -21,7 +22,7 @@ export const FavoritesProvider = ({ children }) => {
 
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:3000/api/favorites', {
+      const res = await axios.get(`${API_URL}/api/favorites`, {
         headers: getHeaders(),
       });
       setFavorites(res.data);
@@ -41,14 +42,14 @@ export const FavoritesProvider = ({ children }) => {
     try {
       if (isFav) {
         // Eliminar de favoritos
-        await axios.delete(`http://localhost:3000/api/favorites/${product.id}`, {
+        await axios.delete(`${API_URL}/api/favorites/${product.id}`, {
           headers: getHeaders(),
         });
         setFavorites((prev) => prev.filter((fav) => fav.id !== product.id));
       } else {
         // Agregar a favoritos
         await axios.post(
-          'http://localhost:3000/api/favorites',
+          `${API_URL}/api/favorites`,
           { product_id: product.id },
           { headers: getHeaders() }
         );

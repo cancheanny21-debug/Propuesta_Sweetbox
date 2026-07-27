@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/apiConfig';
 import './Profile.css'; // Reutilizamos estilos globales del perfil y añadimos específicos si es necesario
 
 const ProfileEdit = () => {
@@ -35,7 +36,7 @@ const ProfileEdit = () => {
     try {
       const token = localStorage.getItem('sweetbox_token');
       const res = await axios.put(
-        'http://localhost:3000/api/auth/profile',
+        `${API_URL}/api/auth/profile`,
         { nombre, password: password || undefined },
         { headers: { Authorization: `Bearer ${token}` } }
       );
